@@ -2,7 +2,9 @@
 set -eu
 
 # pin to latest version: https://pypi.org/project/migra/
-pip install -qU migra==3.0.1663481299
+if ! [ -x "$(command -v migra)" ]; then
+  pip install -qU migra==3.0.1663481299
+fi
 
 # migra doesn't shutdown gracefully, so kill it ourselves
 trap 'kill -9 %1' TERM
